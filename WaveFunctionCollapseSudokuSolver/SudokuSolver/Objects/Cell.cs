@@ -16,11 +16,21 @@ namespace SudokuSolver.Objects
         public List<int> PossibleValues { get; set; }
 
 
-        public Cell((int, int) position, int boardSize)
+        public Cell((int, int) position, int boardSize, int initialValue = 0)
         {
             this.Position = position;
-            this.PossibleValues = Enumerable.Range(1, boardSize).ToList(); // Init possible values to all values
-            this.Value = null; // Init value to null as only gets value once collapsed
+                        
+            if(initialValue > 0) 
+            {
+                // Has initial value provided
+                this.PossibleValues = new List<int>();
+            }
+            else
+            {
+                this.PossibleValues = Enumerable.Range(1, boardSize).ToList(); // All possible values
+            }
+
+            this.Value = initialValue > 0 ? initialValue : null; 
         }
     }
 }
